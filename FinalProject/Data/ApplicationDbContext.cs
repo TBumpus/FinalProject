@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using FinalProject.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace FinalProject.Data
 {
@@ -8,5 +9,8 @@ namespace FinalProject.Data
         {
 
         }
+
+        public DbSet<Users> User { get; set; }
+        public DbSet<Movies> Movie { get; set; }
     }
 }
