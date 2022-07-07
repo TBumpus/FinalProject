@@ -1,7 +1,9 @@
 ﻿using FinalProject.Data;
+using FinalProject.Models;
 using FinalProject.Services.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace FinalProject.Controllers
 {
@@ -12,6 +14,7 @@ namespace FinalProject.Controllers
         private ApplicationDbContext _context;
 
         private IIMDBService _IMDBService;
+        //User newUser = new User(1,"this", 5);
         public MoviesController(ApplicationDbContext context, IIMDBService imdbService)
         {
             _context = context;
@@ -73,6 +76,14 @@ namespace FinalProject.Controllers
             return Ok();
         }
 
+        [HttpPost("AddNewUser")]
+        public IActionResult AddNewUser(User newUser)
+        {
+            _context.Users.Add(newUser);
+            _context.SaveChanges();
+            return Ok();
+        }
+
         [HttpPut("UpdateCategory")]
         public IActionResult UpdateCategory()
         {
@@ -84,5 +95,7 @@ namespace FinalProject.Controllers
         {
             return Ok();
         }
+
+        
     }
 }
