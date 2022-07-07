@@ -89,6 +89,14 @@ namespace FinalProject.Controllers
             return Ok();
         }
 
+        [HttpGet("GetUsername")]
+        public IActionResult GetUsername(string username)
+        {
+            var searchUser = _context.Users.Where(x => x.UserName.ToLower() == username.ToLower()).FirstOrDefault();
+
+            return Ok(searchUser);
+        }
+
         [HttpPost("AddNewUser")]
         public IActionResult AddNewUser(User newUser)
         {
