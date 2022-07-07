@@ -23,7 +23,7 @@ namespace FinalProject.Controllers
 
         //Gets all movies from current user list.
         [HttpGet("GetAllMovies")]
-        public IActionResult GetAllMovies(string authId)
+        public IActionResult GetAllMoviesFromUserList(string authId)
         {
             if (_context.Movies == null)
             {
