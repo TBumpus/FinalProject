@@ -21,16 +21,17 @@ namespace FinalProject.Controllers
 
 
 
-
+        //Gets all movies from current user list.
         [HttpGet("GetAllMovies")]
-        public IActionResult GetAllMovies()
+        public IActionResult GetAllMovies(string authId)
         {
             if (_context.Movies == null)
             {
                 return NotFound();
             }
-            _IMDBService.GetMovieByName();
-            return Ok(_context.Movies.ToList());
+            var response = _context.Movies.Where(x => x.Auth0Id == authId).ToList();
+
+            return Ok(response);
 
 
         }
