@@ -48,9 +48,21 @@ namespace FinalProject.Controllers
 
         //Use random feature 
         [HttpGet("GetRandomMovieFromUserList")]
-        public IActionResult GetRandomMovieFromUserList()
+        public IActionResult GetRandomMovieFromUserList(string authId)
         {
-            return Ok();
+            if (_context.Movies == null)
+            {
+                return NotFound();
+            }
+
+            var userList = _context.Movies.Where(x => x.Auth0Id == authId).ToList();
+
+            var rand = new Random();
+            int number = rand.Next(1, userList.Count() + 1);
+
+            var movie = userList[number-1];
+
+            return Ok(movie);
         }
 
         [HttpGet("GetMoviesByCategoryFromList")]
