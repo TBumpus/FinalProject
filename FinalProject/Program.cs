@@ -1,5 +1,7 @@
 using FinalProject.Data;
 using FinalProject.Middleware;
+using FinalProject.Services;
+using FinalProject.Services.Interfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
@@ -11,6 +13,10 @@ var builder = WebApplication.CreateBuilder(args);
 
 
 builder.Services.AddDbContext<ApplicationDbContext>(x => x.UseSqlServer(builder.Configuration.GetConnectionString("AppDb")));
+
+//Dependency Injection so we know where to get the information for the object
+builder.Services.AddScoped<IIMDBService, IMDBService>(); 
+
 
 string domain = $"https://{builder.Configuration["Auth0:Domain"]}/";
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
