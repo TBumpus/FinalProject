@@ -78,10 +78,38 @@ namespace FinalProject.Controllers
 
             if (response.Count == 0)
             {
-                return BadRequest(response);
+                return BadRequest(category);
             }   
 
             return Ok(response);
+        }
+
+        [HttpGet("GetRandomMovieByCategoryFromUserList")]
+        public IActionResult GetRandomMovieByCategoryFromUserList(string authId, MovieCategory category)
+        {
+            if (_context.Movies == null)
+            {
+                return NotFound();
+            }
+
+            var userCategoryList = _context.Movies.Where(x => x.Auth0Id == authId && x.Category == category).ToList();
+
+            var rand = new Random();
+            int number = rand.Next(1, userCategoryList.Count() + 1);
+
+            if (userCategoryList.Count == 0)
+            {
+                return BadRequest(category);
+            }
+
+            var movie = userCategoryList[number - 1];
+
+            if (movie == null)
+            {
+                return BadRequest(movie);
+            }
+
+            return Ok(movie);
         }
 
 
