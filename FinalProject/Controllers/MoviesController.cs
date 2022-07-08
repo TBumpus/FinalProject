@@ -1,4 +1,5 @@
 ﻿using FinalProject.Data;
+using FinalProject.Enums;
 using FinalProject.Models;
 using FinalProject.Services.Interfaces;
 using Microsoft.AspNetCore.Http;
@@ -25,7 +26,7 @@ namespace FinalProject.Controllers
 
 
         //Gets all movies from current user list.
-        [HttpGet("GetAllMovies")]
+        [HttpGet("GetAllMoviesFromUserList")]
         public IActionResult GetAllMoviesFromUserList(string authId)
         {
             if (_context.Movies == null)
@@ -65,11 +66,24 @@ namespace FinalProject.Controllers
             return Ok(movie);
         }
 
-        [HttpGet("GetMoviesByCategoryFromList")]
-        public IActionResult GetMoviesByCategoryFromList()
+        [HttpGet("GetMoviesByCategoryFromUserList")]
+        public IActionResult GetMoviesByCategoryFromUserList(string authId, MovieCategory category)
         {
-            return Ok();
+            if (_context.Movies == null)
+            {
+                return NotFound();
+            }
+
+            var response = _context.Movies.Where(x => x.Auth0Id == authId && x.Category == category).ToList();
+
+            if (response.Count == 0)
+            {
+                return BadRequest(response);
+            }   
+
+            return Ok(response);
         }
+
 
         [HttpGet("GetMovieByIdFromList")]
         public IActionResult GetMovieByIdFromList()
