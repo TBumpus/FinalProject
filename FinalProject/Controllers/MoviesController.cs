@@ -120,8 +120,12 @@ namespace FinalProject.Controllers
         }
 
         [HttpDelete("DeleteMovieFromList")]
-        public IActionResult DeleteMovieFromList()
+        public IActionResult DeleteMovieFromList(Movie movie)
         {
+            _context.Movies.Remove(movie);
+
+            _context.SaveChanges();
+
             return Ok();
         }
 
