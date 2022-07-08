@@ -133,10 +133,11 @@ namespace FinalProject.Controllers
 
             return Ok();
         }
-
+        
         [HttpGet("SearchThirdParty")]
         public IActionResult SearchThirdParty()
         {
+
             return Ok();
         }
 

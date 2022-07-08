@@ -1,7 +1,9 @@
-﻿namespace FinalProject.Services.Interfaces
+﻿using FinalProject.Models;
+
+namespace FinalProject.Services.Interfaces
 {
     public interface IIMDBService
     {
-        void GetMovieByName();
+        Task<Movie> GetMovieByName(string searchTerm);
     }
 }
