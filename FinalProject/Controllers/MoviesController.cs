@@ -1,4 +1,5 @@
 ﻿using FinalProject.Data;
+using FinalProject.Enums;
 using FinalProject.Models;
 using FinalProject.Services.Interfaces;
 using Microsoft.AspNetCore.Http;
@@ -86,8 +87,17 @@ namespace FinalProject.Controllers
         }
 
         [HttpPut("UpdateCategory")]
-        public IActionResult UpdateCategory()
+        public IActionResult UpdateCategory(Movie movie)
         {
+            //pull the movie from the database by id
+            var movieToUpdate = _context.Movies.Find(movie.Id);
+
+            //set the category from the pulled movie to the category that is coming in as a function
+            movieToUpdate.Category = movie.Category;
+
+            //save changes after
+            _context.SaveChanges();
+
             return Ok();
         }
 
