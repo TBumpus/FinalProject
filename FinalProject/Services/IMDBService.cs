@@ -7,13 +7,13 @@ namespace FinalProject.Services
     {
         //Get Movie by Name 
         //This is where you insert the API key, etc similar to Angular. 
-        public async Task<Movie> GetMovieByName(string searchTerm)
+        public async Task<MovieAPI> GetMovieByName(string searchTerm)
         {
             HttpClient client = new HttpClient();
 
-            client.BaseAddress = new Uri("https://imdb-api.com/api");
+            client.BaseAddress = new Uri("https://imdb-api.com/en/API/SearchMovie/k_mse6n4lw/");
 
-            var response = await client.GetFromJsonAsync<Movie>("?t=" + searchTerm + "&apiKey=k_mse6n4lw");
+            var response = await client.GetFromJsonAsync<MovieAPI>(searchTerm);
 
             return response; 
         }

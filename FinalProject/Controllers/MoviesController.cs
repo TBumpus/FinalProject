@@ -156,10 +156,11 @@ namespace FinalProject.Controllers
         }
         
         [HttpGet("SearchThirdParty")]
-        public IActionResult SearchThirdParty()
+        public  async Task<IActionResult> SearchThirdParty(string searchTerm)
         {
 
-            return Ok();
+            var userSearch = await _IMDBService.GetMovieByName(searchTerm);
+            return Ok(userSearch);
         }
 
         
