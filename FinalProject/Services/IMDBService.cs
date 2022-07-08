@@ -1,4 +1,5 @@
-﻿using FinalProject.Services.Interfaces;
+﻿using FinalProject.Models;
+using FinalProject.Services.Interfaces;
 
 namespace FinalProject.Services
 {
@@ -6,9 +7,17 @@ namespace FinalProject.Services
     {
         //Get Movie by Name 
         //This is where you insert the API key, etc similar to Angular. 
-        public void GetMovieByName()
+        public async Task<Movie> GetMovieByName(string searchTerm)
         {
-            throw new NotImplementedException();
+            HttpClient client = new HttpClient();
+
+            client.BaseAddress = new Uri("https://imdb-api.com/api");
+
+            var response = await client.GetFromJsonAsync<Movie>("?t=" + searchTerm + "&apiKey=k_mse6n4lw");
+
+            return response; 
         }
+
+     
     }
 }
