@@ -10,7 +10,7 @@ namespace FinalProject.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class MoviesController : Controller
+    public class MoviesController : BaseController
     {
         private ApplicationDbContext _context;
 
@@ -122,6 +122,9 @@ namespace FinalProject.Controllers
         [HttpPut("UpdateCategory")]
         public IActionResult UpdateCategory(Movie movie)
         {
+
+            var test = GetUserAuthId();
+
             //pull the movie from the database by id
             var movieToUpdate = _context.Movies.Find(movie.Id);
 
