@@ -40,13 +40,6 @@ namespace FinalProject.Controllers
 
         }
 
-        //Figure out how to find a random movie 
-        [HttpGet("GetRandomMovieFromThirdParty")]
-        public IActionResult GetRandomMovieFromThirdParty()
-        {
-            return Ok();
-        }
-
         //Use random feature 
         [HttpGet("GetRandomMovieFromUserList")]
         public IActionResult GetRandomMovieFromUserList(string authId)
@@ -113,14 +106,8 @@ namespace FinalProject.Controllers
         }
 
 
-        [HttpGet("GetMovieByIdFromList")]
-        public IActionResult GetMovieByIdFromList()
-        {
-            return Ok();
-        }
-
-        [HttpDelete("DeleteMovieFromList")]
-        public IActionResult DeleteMovieFromList(Movie movie)
+        [HttpDelete("DeleteMovieFromUserList")]
+        public IActionResult DeleteMovieFromUserList(Movie movie)
         {
             _context.Movies.Remove(movie);
 
@@ -129,9 +116,11 @@ namespace FinalProject.Controllers
             return Ok();
         }
 
-        [HttpPost("AddMovieToList")]
-        public IActionResult AddMovieToList()
+        [HttpPost("AddMovieToUserList")]
+        public IActionResult AddMovieToUserList(Movie newMovie)
         {
+            _context.Movies.Add(newMovie);
+            _context.SaveChanges();
             return Ok();
         }
 
