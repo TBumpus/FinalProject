@@ -15,7 +15,7 @@ namespace FinalProject.Controllers
         private ApplicationDbContext _context;
 
         private IIMDBService _IMDBService;
-        //User newUser = new User(1,"this", 5);
+
         public MoviesController(ApplicationDbContext context, IIMDBService imdbService)
         {
             _context = context;
@@ -78,14 +78,14 @@ namespace FinalProject.Controllers
         }
 
         [HttpGet("GetRandomMovieByCategoryFromUserList")]
-        public IActionResult GetRandomMovieByCategoryFromUserList(string authId, MovieCategory category)
+        public IActionResult GetRandomMovieByCategoryFromUserList(MovieCategory category)
         {
             if (_context.Movies == null)
             {
                 return NotFound();
             }
 
-            var userCategoryList = _context.Movies.Where(x => x.Auth0Id == authId && x.Category == category).ToList();
+            var userCategoryList = _context.Movies.Where(x => x.Auth0Id == GetUserAuthId() && x.Category == category).ToList();
 
             var rand = new Random();
             int number = rand.Next(1, userCategoryList.Count() + 1);
@@ -146,13 +146,10 @@ namespace FinalProject.Controllers
 
             var test = GetUserAuthId();
 
-            //pull the movie from the database by id
             var movieToUpdate = _context.Movies.Find(movie.Id);
 
-            //set the category from the pulled movie to the category that is coming in as a function
             movieToUpdate.Category = movie.Category;
 
-            //save changes after
             _context.SaveChanges();
 
             return Ok();

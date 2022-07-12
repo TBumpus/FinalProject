@@ -7,6 +7,10 @@
         public int AuthId  { get; set; }
         public string UserName { get; set; }    
 
+        public User()
+        {
+
+        }
         public User(int id, string userName, int authId)
         {
             Id = id;

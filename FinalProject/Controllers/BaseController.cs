@@ -14,7 +14,7 @@ namespace FinalProject.Controllers
             {
                 return userNameClaim.Value;
             }
-            return "none";
+            return "2";
         }
 
     }
