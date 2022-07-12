@@ -9,22 +9,14 @@ namespace FinalProject.Controllers
     {
         protected string GetUserAuthId()
         {
-            if(User.Claims != null)
+            var userNameClaim = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier);
+            if (userNameClaim != null)
             {
-                var userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value;
-                if (string.IsNullOrEmpty(userId))
-                {
-                    return "none";
-                }
-                else
-                {
-                    return userId;
-                }
+                return userNameClaim.Value;
             }
-
             return "none";
-            
-            
         }
+
     }
 }
+

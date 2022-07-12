@@ -27,13 +27,13 @@ namespace FinalProject.Controllers
 
         //Gets all movies from current user list.
         [HttpGet("GetAllMoviesFromUserList")]
-        public IActionResult GetAllMoviesFromUserList(string authId)
+        public IActionResult GetAllMoviesFromUserList()
         {
             if (_context.Movies == null)
             {
                 return NotFound();
             }
-            var response = _context.Movies.Where(x => x.Auth0Id == authId).ToList();
+            var response = _context.Movies.Where(x => x.Auth0Id == GetUserAuthId()).ToList();
 
             return Ok(response);
 
@@ -49,14 +49,14 @@ namespace FinalProject.Controllers
 
         //Use random feature 
         [HttpGet("GetRandomMovieFromUserList")]
-        public IActionResult GetRandomMovieFromUserList(string authId)
+        public IActionResult GetRandomMovieFromUserList()
         {
             if (_context.Movies == null)
             {
                 return NotFound();
             }
 
-            var userList = _context.Movies.Where(x => x.Auth0Id == authId).ToList();
+            var userList = _context.Movies.Where(x => x.Auth0Id == GetUserAuthId()).ToList();
 
             var rand = new Random();
             int number = rand.Next(1, userList.Count() + 1);
@@ -67,14 +67,14 @@ namespace FinalProject.Controllers
         }
 
         [HttpGet("GetMoviesByCategoryFromUserList")]
-        public IActionResult GetMoviesByCategoryFromUserList(string authId, MovieCategory category)
+        public IActionResult GetMoviesByCategoryFromUserList(MovieCategory category)
         {
             if (_context.Movies == null)
             {
                 return NotFound();
             }
 
-            var response = _context.Movies.Where(x => x.Auth0Id == authId && x.Category == category).ToList();
+            var response = _context.Movies.Where(x => x.Auth0Id == GetUserAuthId() && x.Category == category).ToList();
 
             if (response.Count == 0)
             {
