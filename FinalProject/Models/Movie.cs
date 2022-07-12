@@ -11,6 +11,11 @@ namespace FinalProject.Models
         public MovieCategory Category { get; set; }
 
       
+        public Movie()
+        {
+
+        }
+
         public Movie (int id, string auth0id, string imdbId, string title, MovieCategory category)
         {
             Id = id;
