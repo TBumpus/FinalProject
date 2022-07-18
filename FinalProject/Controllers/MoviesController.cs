@@ -119,6 +119,7 @@ namespace FinalProject.Controllers
         [HttpPost("AddMovieToUserList")]
         public IActionResult AddMovieToUserList(Movie newMovie)
         {
+            newMovie.Auth0Id = GetUserAuthId();
             _context.Movies.Add(newMovie);
             _context.SaveChanges();
             return Ok();
