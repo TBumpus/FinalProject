@@ -150,14 +150,11 @@ namespace FinalProject.Controllers
         }
 
         [HttpPut("UpdateCategory")]
-        public IActionResult UpdateCategory(Movie movie)
+        public IActionResult UpdateCategory(int id, MovieCategory category)
         {
 
-            var test = GetUserAuthId();
-
-            var movieToUpdate = _context.Movies.Find(movie.Id);
-
-            movieToUpdate.Category = movie.Category;
+            Movie movieToUpdate = _context.Movies.FirstOrDefault(x => x.Id == id);
+            movieToUpdate.Category = category; 
 
             _context.SaveChanges();
 
