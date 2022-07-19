@@ -109,8 +109,13 @@ namespace FinalProject.Controllers
 
 
         [HttpDelete("DeleteMovieFromUserList")]
-        public IActionResult DeleteMovieFromUserList(Movie movie)
+        public IActionResult DeleteMovieFromUserList(int id)
         {
+            Movie movie = _context.Movies.FirstOrDefault(x => x.Id == id);
+            if (movie == null)
+            {
+                return BadRequest(movie);
+            }
             _context.Movies.Remove(movie);
 
             _context.SaveChanges();
