@@ -2,6 +2,7 @@
 using FinalProject.Enums;
 using FinalProject.Models;
 using FinalProject.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
@@ -27,6 +28,7 @@ namespace FinalProject.Controllers
 
         //Gets all movies from current user list.
         [HttpGet("GetAllMoviesFromUserList")]
+        [Authorize]
         public IActionResult GetAllMoviesFromUserList()
         {
             if (_context.Movies == null)
@@ -117,6 +119,7 @@ namespace FinalProject.Controllers
         }
 
         [HttpPost("AddMovieToUserList")]
+        [Authorize]
         public IActionResult AddMovieToUserList(Movie newMovie)
         {
             newMovie.Auth0Id = GetUserAuthId();
