@@ -169,7 +169,7 @@ namespace FinalProject.Controllers
             return Ok(userSearch);
         }
         
-        [HttpPost("CheckForUserName")]
+        [HttpGet("CheckForUserName")]
         [Authorize]
         public async Task<IActionResult> CheckForUserName(string id)
         {
