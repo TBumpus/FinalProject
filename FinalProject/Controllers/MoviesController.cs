@@ -171,10 +171,10 @@ namespace FinalProject.Controllers
         
         [HttpGet("CheckForUserName")]
         [Authorize]
-        public async Task<IActionResult> CheckForUserName(string id)
+        public async Task<IActionResult> CheckForUserName()
         {
             bool userIsThere;
-            userIsThere = _context.Users.Any(x => x.AuthId == id);
+            userIsThere = _context.Users.Any(x => x.AuthId == GetUserAuthId());
             return Ok(userIsThere);
         }
         
