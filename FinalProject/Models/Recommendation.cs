@@ -3,9 +3,12 @@
     public class Recommendation
     {
         public int Id { get; set; }
-        public int SenderId { get; set; }
-        public int ReceiverId { get; set; }
-        public string Suggestion { get; set; }
+        public string SenderName { get; set; }
+        public string ReceiverName { get; set; }
         
+        public string Title { get; set; }
+        public string IMDBId { get; set;}
+
+
     }
 }
