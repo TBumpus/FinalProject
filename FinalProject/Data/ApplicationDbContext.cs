@@ -12,6 +12,7 @@ namespace FinalProject.Data
         }
 
         //Creating test information to confirm that endpoints function 
+        /*
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Movie>().HasData(
@@ -25,8 +26,12 @@ namespace FinalProject.Data
                 new User(3, "User3", 4)
                 );
         }
+        */
 
         public DbSet<User> Users { get; set; }
         public DbSet<Movie> Movies { get; set; }
+
+        public DbSet<Recommendation> Recommendation { get; set; }
+
     }
 }

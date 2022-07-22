@@ -168,7 +168,15 @@ namespace FinalProject.Controllers
             var userSearch = await _IMDBService.GetMovieByName(searchTerm);
             return Ok(userSearch);
         }
-
+        
+        [HttpPost("CheckForUserName")]
+        [Authorize]
+        public async Task<IActionResult> CheckForUserName(string id)
+        {
+            bool userIsThere;
+            userIsThere = _context.Users.Any(x => x.AuthId == id);
+            return Ok(userIsThere);
+        }
         
     }
 }

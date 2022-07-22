@@ -4,14 +4,14 @@
     {
         public int Id { get; set; }
 
-        public int AuthId  { get; set; }
+        public string AuthId  { get; set; }
         public string UserName { get; set; }    
 
         public User()
         {
 
         }
-        public User(int id, string userName, int authId)
+        public User(int id, string userName, string authId)
         {
             Id = id;
             UserName = userName;
