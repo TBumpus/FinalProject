@@ -144,6 +144,7 @@ namespace FinalProject.Controllers
         [HttpPost("AddNewUser")]
         public IActionResult AddNewUser(User newUser)
         {
+            newUser.AuthId = GetUserAuthId();
             _context.Users.Add(newUser);
             _context.SaveChanges();
             return Ok();
