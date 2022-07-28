@@ -178,6 +178,36 @@ namespace FinalProject.Controllers
             userIsThere = _context.Users.Any(x => x.AuthId == GetUserAuthId());
             return Ok(userIsThere);
         }
-        
+
+        [HttpPost("RecommendMovie")]
+        [Authorize]
+        public async Task<IActionResult> RecommendMovie(Recommendation rec)
+        {
+            var user = _context.Users.Where(x=> x.UserName == rec.UserName).FirstOrDefault();
+            if (user == null)
+            {
+                return BadRequest(user);
+            }
+            Recommendation r = new Recommendation()
+            {
+                SenderName = GetUserAuthId(),
+                ReceiverName = user.AuthId,
+                Title = rec.Title,
+                IMDBId = rec.IMDBId,
+                ImageURL = rec.ImageURL
+            };
+
+            _context.Recommendation.Add(r);
+            _context.SaveChanges();
+            return Ok();
+        }
+
+        [HttpGet("DisplayRecommendations")]
+        public async Task<IActionResult> DisplayRecommendations()
+        {
+            return Ok(_context.Recommendation.Where(x => x.ReceiverName == GetUserAuthId()).ToList());
+        }
+
+
     }
 }
